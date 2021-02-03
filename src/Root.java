@@ -1,4 +1,4 @@
-import java.util.Random;
+
 
 /**
  *
@@ -8,7 +8,6 @@ import java.util.Random;
  */
 public class Root {
     private double a, b, c, d, e, f, g, x;
-    private double equ;
 
     /**
      *
@@ -31,14 +30,6 @@ public class Root {
         this.g = g;
     }
 
-    /**
-     * Boolean returns true if root is found else false
-     *
-     * @return true if root found; false if not
-     */
-    public boolean isRoot() {
-        return false;
-    }
 
     /**
      *
@@ -62,9 +53,9 @@ public class Root {
 
     /**
      *
-     * @return drivatve of the equation with x given to doMath()
+     * @return derivative of the equation with x given to doMath()
      */
-    private double firstDrivative(){
+    private double firstDerivative(){
         return ((a * 6) * Math.pow(this.x, 5))
                 - ((b * 5) * Math.pow(this.x, 4))
                 + ((this.c * 4) * Math.pow(this.x, 3))
@@ -80,6 +71,6 @@ public class Root {
      */
     public double doMath(double x){
         setX(x);
-        return this.x - (equation()/firstDrivative());
+        return this.x - (equation()/ firstDerivative());
     }
 }
