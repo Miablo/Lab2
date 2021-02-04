@@ -12,6 +12,7 @@ public class Main {
 
     static Random rand = new Random();
     static ArrayList x = new ArrayList();
+    static ArrayList roots = new ArrayList();
     static Root root = new Root();
     static DecimalFormat decFor = new DecimalFormat("#0.00000"); // set the format for decimal values to br printed and compared
     static int i = 0;
@@ -20,37 +21,56 @@ public class Main {
     static int max = 100; //lets there be a max double for random
 
     /**
-     *  Main Method
+     * Main Method
      *
      * @param args not used
      */
     public static void main(String[] args) {
         // for Cody's PSU ID
         root.setNumbers(9,5,5,0,7,4,1);
+        //root.setNumbers(0,1,0,0,0,0,1); //for test propose
+        double a, b;
         int j = 0;
-        do { // first loop for the guess for value x0
+        do { // will try 10 random number guess with first loop
+            int end = 0;
             i = 0;
-            x.add((double) rand.nextDouble() * (max - min +1) + min);
-            do { // 2nd loop to take guess to x1999 or if root is found
+            x.add(rand.nextDouble() * (max - min + 1) + min);
+            do { // 2nd loop to take guess to x1999 or if root is found or until solution is found
                 x.add(root.doMath((Double) x.get(i)));
                 i++;
-            } while (i < 2000 || decFor.format((double) x.get(i - 1)) == decFor.format((double) x.get(i) + 0.00001));
-
-            //System.out.println("For Cody x0 = " + decFor.format(x.get(0)));
-            if (decFor.format((double) x.get(i - 1)) == decFor.format((double) x.get(i) + 0.00001)) { //prints out root found for x0 guess at location and number that was close to or at 0
-                System.out.println("For Cody x0 = " + decFor.format(x.get(0)));
-                System.out.println("Iterations: x" + x.size() + " The number is" + decFor.format((double) x.get(i)));
-                rootFound++;
-            } else {
-                //System.out.println("Not Found as the final solution");
+                a = (double) x.get(i);
+                b = (double) x.get(i - 1);
+                if (a <= b + 0.00001 && a >= b - 0.00001) {
+                    end = -1;
+                }
+                if(i == 1999){
+                    end = -1;
+                }
+            } while (end != -1);
+            if(a <= b + 0.00001 && a >= b - 0.00001) {
+                if (roots.size() == 0) {
+                    roots.add(a);
+                } else {
+                    for (int p = 0; p < roots.size(); p++) {
+                        double check = (double) roots.get(p);
+                        if (check != a) {
+                            roots.add(a);
+                        }
+                    }
+                }
             }
-            x.clear();
             j++;
-        }while(j<2000);
-        if(rootFound == 0){
-            System.out.println("No Roots found for Cody's PSU Id.");
-        }else
-        System.out.println("Number of root Found for Cody: " + rootFound);
+        }while(j < 1999);
+
+        if (roots.size() > 0) { //prints out all the roots that were found
+            System.out.print("For Cody PSU Id the root equals = ");
+            for(int p = 0; p < roots.size() ; p++){
+                System.out.print(decFor.format(roots.get(p)) + " ");
+            }
+            //System.out.println("Not Found as the final solution");
+        } else { //prints out root not found
+            System.out.println("Not Found as the final solution");
+        }
     }
 }
 
