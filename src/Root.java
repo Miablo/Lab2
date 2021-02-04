@@ -71,6 +71,10 @@ public class Root {
      */
     public double doMath(double x){
         setX(x);
-        return this.x - (equation()/ firstDerivative());
+        if (this.x == 0){ // if x is 0 the equation will equal 0 so just return 0
+            return 0;
+        }else {
+            return this.x - (equation() / firstDerivative());
+        }
     }
 }
