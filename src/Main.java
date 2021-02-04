@@ -32,43 +32,40 @@ public class Main {
         double a, b;
         int j = 0;
         do { // will try 10 random number guess with first loop
-            int end = 0;
-            i = 0;
-            x.add(rand.nextDouble() * (max - min + 1) + min);
+            int end = 0; // reset end of loop2
+            i = 0; // reset loop counter
+            x.add(rand.nextDouble() * (max - min + 1) + min); //gets random double between min and max and adds it as x0
             do { // 2nd loop to take guess to x1999 or if root is found or until solution is found
-                x.add(root.doMath((Double) x.get(i)));
+                x.add(root.doMath((Double) x.get(i))); //adds new value to xi
                 i++;
                 a = (double) x.get(i);
                 b = (double) x.get(i - 1);
-                if (a <= b + 0.00001 && a >= b - 0.00001) {
+                if (a <= b + 0.00001 && a >= b - 0.00001) { //checks if root is found
                     end = -1;
-                }
-                if(i == 1999){
-                    end = -1;
-                }
-            } while (end != -1);
-            if(a <= b + 0.00001 && a >= b - 0.00001) {
-                if (roots.size() == 0) {
-                    roots.add(a);
-                } else {
-                    for (int p = 0; p < roots.size(); p++) {
-                        double check = (double) roots.get(p);
-                        if (check != a) {
-                            roots.add(a);
+                    if (roots.size() == 0) { //add root if no roots already found
+                        roots.add(a);
+                    } else {
+                        for (int p = 0; p < roots.size(); p++) { // check new roots against old and add if no match
+                            double check = (double) roots.get(p);
+                            if (check != a) {
+                                roots.add(a);
+                            }
                         }
                     }
                 }
-            }
+                if(i == 1999){ // check if loop reach max counter
+                    end = -1;
+                }
+            } while (end != -1); // end of 2nd loop
             j++;
-        }while(j < 1999);
+        }while(j < 1999); // end of 1st loop
 
         if (roots.size() > 0) { //prints out all the roots that were found
             System.out.print("For Cody PSU Id the root equals = ");
             for(int p = 0; p < roots.size() ; p++){
                 System.out.print(decFor.format(roots.get(p)) + " ");
             }
-            //System.out.println("Not Found as the final solution");
-        } else { //prints out root not found
+        } else { //prints out root not found if no roots were found
             System.out.println("Not Found as the final solution");
         }
     }
