@@ -3,6 +3,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
+ * Main method used as program driver
+ * used Root class to determine if a random number
+ * is a root for the specific polynomial
  *
  * @author Mio Diaz, Cody Walker
  * @version 1.0
@@ -11,11 +14,11 @@ import java.util.Random;
 public class Main {
 
     static Random rand = new Random();
-    static ArrayList x = new ArrayList();
-    static ArrayList roots = new ArrayList();
+    static ArrayList<Double> x = new ArrayList();
+    static ArrayList<Double> roots = new ArrayList();
     static Root root = new Root();
     static DecimalFormat decFor = new DecimalFormat("#0.00000"); // set the format for decimal values to br printed and compared
-    static int i = 0;
+    static int i = 0; // used in do while loop in main method
     static int rootFound = 0; // lets the final number of roots be found
     static int min = 0; //lets there be a min double for random
     static int max = 100; //lets there be a max double for random
@@ -28,7 +31,7 @@ public class Main {
     public static void main(String[] args) {
         // for Cody's PSU ID
         root.setNumbers(9,5,5,0,7,4,1);
-        //root.setNumbers(0,1,0,0,0,0,1); //for test propose
+        //root.setNumbers(1,0,0,0,0,0,-1); //for test propose
         double a, b;
         int j = 0;
         do { // will try 10 random number guess with first loop
@@ -61,26 +64,12 @@ public class Main {
         }while(j < 1999); // end of 1st loop
 
         if (roots.size() > 0) { //prints out all the roots that were found
-            System.out.print("For Cody PSU Id the root equals = ");
-            for(int p = 0; p < roots.size() ; p++){
-                System.out.print(decFor.format(roots.get(p)) + " ");
+            System.out.print("Found roots: ");
+            for (Object o : roots) {
+                System.out.print(decFor.format(o) + " ");
             }
         } else { //prints out root not found if no roots were found
-            System.out.println("Not Found as the final solution");
+            System.out.println("No roots found");
         }
     }
 }
-
-/*
-(4 pts) Implement a Java program that applies the Newton-Raphson's method xn+1 = xn – f(xn) / f '(xn)
-to search the roots for this polynomial function ax6 – bx5 + cx4 – dx3+ ex2 – fx + g = 0. Fill out a, b, c, d, e, f, and g
-using the first 7 digits of your PSU ID, respectively. For example, if PSU ID is 987654321,
-the polynomial function would be 9x6 – 8x5 + 7x4 – 6x3+ 5x2 – 4x + 3 = 0.
-
-The program terminates when the difference between the new solution
-and the previous one is smaller than 0.00001 within 2000 iterations. Otherwise, it shows Not Found as the final solution.
-
-Your team’s goal is to find as many roots as possible. For the Newton-Raphson’s method, you will need to start with a guessed x0
-value which can be randomly generated. List out each guessed x0 value, the derived root, the number of iteration for finding the root,
-and the value of the polynomial function by plugging in the root.
- */

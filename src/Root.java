@@ -1,6 +1,7 @@
-
-
 /**
+ *
+ * Roots class houses all the methods required
+ * to determine the roots of a polynomial equation
  *
  * @author Mio Diaz, Cody Walker
  * @version 1.0
@@ -10,6 +11,7 @@ public class Root {
     private double a, b, c, d, e, f, g, x;
 
     /**
+     * Sets values for coefficients of polynomial
      *
      * @param a sets a from main
      * @param b sets b from main
@@ -30,8 +32,8 @@ public class Root {
         this.g = g;
     }
 
-
     /**
+     * Method used to set the value of x
      *
      * @param x set x from doMath() for the equation
      */
@@ -40,6 +42,9 @@ public class Root {
     }
 
     /**
+     * Method creates and fills in values for
+     * the polynomial function:
+     * ax6 – bx5 + cx4 – dx3+ ex2 – fx + g = 0
      *
      * @return equation with x given to doMath()
      */
@@ -52,6 +57,7 @@ public class Root {
     }
 
     /**
+     * Method used to create the derivative of the polynomial F'(x)
      *
      * @return derivative of the equation with x given to doMath()
      */
@@ -65,6 +71,7 @@ public class Root {
     }
 
     /**
+     * Method is used to return the value of x_1
      *
      * @param x the x to pass to setX for the formula
      * @return returns x_n+1 back to main
